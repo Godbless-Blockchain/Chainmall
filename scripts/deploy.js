@@ -42,12 +42,12 @@ async function main() {
 
 function updateEnvFile(filePath, key, value) {
   let envContent = "";
+
   if (fs.existsSync(filePath)) {
     envContent = fs.readFileSync(filePath, "utf-8");
     if (envContent.includes(`${key}=`)) {
       envContent = envContent.replace(new RegExp(`${key}=.*`), `${key}=${value}`);
     } else {
-      envContent += `\n${key}=${value}`;
     }
   } else {
     envContent = `${key}=${value}`;
