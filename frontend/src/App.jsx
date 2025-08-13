@@ -1,78 +1,34 @@
-import { useEffect, useState } from "react";
-import { ethers } from "ethers";
-import { CONTRACT_ADDRESS, CONTRACT_ABI } from "./contracts/chainmall";
-import "./App.css";
+import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import Marketplace from './pages/Marketplace';
+import SellerDashboard from './pages/SellerDashboard';
+import MyOrders from './pages/MyOrders';
+import Profile from './pages/Profile';
+import ProductDetail from './pages/ProductDetail';
+import OrderDetail from "./pages/OrderDetail";
+import Sell from './pages/Sell';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
-  const [wallet, setWallet] = useState(null);
-  const [contract, setContract] = useState(null);
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const load = async () => {
-      if (window.ethereum) {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        await provider.send("eth_requestAccounts", []);
-        const signer = await provider.getSigner();
-
-        const chainMall = new ethers.Contract(
-          CONTRACT_ADDRESS,
-          CONTRACT_ABI,
-          signer
-        );
-
-        setWallet(await signer.getAddress());
-        setContract(chainMall);
-
-        const count = await chainMall.nextProductId();
-        const all = [];
-
-        for (let i = 0; i < count; i++) {
-          const product = await chainMall.getProduct(i);
-          all.push(product);
-        }
-
-        setProducts(all);
-      } else {
-        alert("Please install MetaMask to use ChainMall");
-      }
-    };
-
-    load();
-  }, []);
-
   return (
-    <div className="container">
-      <header className="header">
-        <h1>ChainMall</h1>
-        <p>Wallet: {wallet}</p>
-      </header>
-
-      <div className="grid">
-        {products.length ? (
-          products.map((p, i) => (
-            <div key={i} className="card">
-              <img
-                src={`https://ipfs.io/ipfs/${p.imageHash}`}
-                alt={p.name}
-                onError={(e) => {
-                  e.target.src = "https://via.placeholder.com/300x180?text=No+Image";
-                }}
-              />
-              <div className="info">
-                <h3>{p.name}</h3>
-                <p>{p.description}</p>
-                <p className="price">{ethers.formatEther(p.price)} ETH</p>
-                <p className="category">
-                  {p.category} - {p.subcategory}
-                </p>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>Loading products...</p>
-        )}
-      </div>
+    <div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
+      <Navbar />
+      <main className="flex-grow-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/seller" element={<SellerDashboard />} />
+          <Route path="/orders" element={<MyOrders />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/order/:id" element={<OrderDetail />} />
+          <Route path="/sell" element={<Sell />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+        </Routes>
+      </main>
+      <Footer />
     </div>
   );
 }

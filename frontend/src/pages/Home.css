@@ -1,0 +1,82 @@
+.home-bg {
+  min-height: 100vh;
+  background-image: url('/assets/homepagebg.jpg'); /* Update the path as needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center */
+  align-items: center;     /* Horizontally center */
+}
+
+/* Center the text and add some background for readability */
+.home-content {
+  text-align: center;
+  background: rgba(255,255,255,0.85);
+  padding: 32px 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  max-width: 90vw;
+}
+
+.home-bg h3 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 18px;
+}
+
+.home-bg p {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 32px;
+}
+
+.shop-now-btn {
+  display: inline-block;
+  margin-top: 18px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 32px;
+  font-size: 1.25rem; /* Increased font size */
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,123,255,0.08);
+}
+.shop-now-btn:hover,
+.shop-now-btn:focus {
+  background: #0056b3;
+  color: #fff;
+}
+
+.signup-link {
+  color: #007bff;
+  font-weight: 500;
+  margin-left: 4px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.signup-link:hover {
+  color: #0056b3;
+}
+
+.footer {
+  width: 100%;
+  background: rgba(255,255,255,0.85);
+  color: #333;
+  text-align: center;
+  padding: 18px 0 12px 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
